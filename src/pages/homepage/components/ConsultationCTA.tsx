@@ -3,14 +3,17 @@ import Button from '../../../components/ui/Button';
 import Input from '../../../components/ui/Input';
 import Select from '../../../components/ui/Select';
 import Icon from '../../../components/AppIcon';
+import { useFormSubmit } from 'components/useFormSubmit';
+import { plasticareProcedures } from '../../../../data/procedures';
+import { plasticareSurgeons } from '../../../../data/surgeons';
 
 const ConsultationCTA = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    interested_procedure: '',
-    preferred_doctor: '',
+    interested_procedure_id: '',
+    preferred_doctor_id: '',
     preferred_date: '',
     preferred_time: '',
     message: ''
@@ -19,16 +22,19 @@ const ConsultationCTA = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const procedureOptions = [
-    { value: 'rhinoplasty', label: 'Rhinoplasty' },
-    { value: 'breast-augmentation', label: 'Breast Augmentation' },
-    { value: 'liposuction', label: 'Liposuction' },
-    { value: 'facelift', label: 'Facelift' },
-    { value: 'tummy-tuck', label: 'Tummy Tuck' },
-    { value: 'eyelid-surgery', label: 'Eyelid Surgery' },
-    { value: 'botox-fillers', label: 'Botox & Fillers' },
-    { value: 'other', label: 'Other / Not Sure' }
-  ];
+  const procedures = plasticareProcedures.map((proc) => (
+    {
+      value: proc.id,
+      label: proc.name
+    }
+  ))
+
+  const preferredDoctors = plasticareSurgeons.map((surgeon) => (
+    {
+      value: surgeon.id,
+      label: surgeon.name
+    }
+  ));
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -56,7 +62,7 @@ const ConsultationCTA = () => {
       newErrors.phone = 'Please enter a valid 10-digit phone number';
     }
 
-    if (!formData.interested_procedure) {
+    if (!formData.interested_procedure_id) {
       newErrors.procedure = 'Please select a procedure';
     }
 
@@ -64,6 +70,12 @@ const ConsultationCTA = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const endpoint : string = import.meta.env.VITE_BOOK_CONSULTATION_ENDPOINT;
+  const baseUrl : string = import.meta.env.VITE_BASE_URL
+  const url : string = baseUrl.concat(endpoint)
+  const authToken : string = "GUEST";
+  const method : string = "POST";
+  const mutation = useFormSubmit(url, authToken, method);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -74,18 +86,33 @@ const ConsultationCTA = () => {
     setIsSubmitting(true);
 
     setTimeout(() => {
-      alert('Thank you for your interest! Our team will contact you within 24 hours to schedule your consultation.');
+      const frmData = new FormData();
+      Object.entries(formData).forEach(([key, value]) => 
+      {
+        frmData.append(key, value as string);
+      })
+      mutation.mutate(frmData, 
+        {
+          onSuccess: (responseData) => 
+          {
+            alert('Thank you for your interest! Our team will contact you within 24 hours to schedule your consultation.');
+          }
+        }
+      )
+
       setFormData({
         name: '',
         email: '',
         phone: '',
-        interested_procedure: '',
-        preferred_doctor: '',
+        interested_procedure_id: '',
+        preferred_doctor_id: '',
         preferred_date: '',
         preferred_time: '',
         message: ''
       });
+
       setIsSubmitting(false);
+
     }, 1500);
   };
 
@@ -201,7 +228,7 @@ const ConsultationCTA = () => {
                 <Input
                   label="Phone Number"
                   type="tel"
-                  placeholder="(555) 123-4567"
+                  placeholder="254712345678"
                   value={formData.phone}
                   onChange={(e) => handleInputChange('phone', e.target.value)}
                   error={errors.phone}
@@ -211,9 +238,9 @@ const ConsultationCTA = () => {
                 <Select
                   label="Procedure of Interest"
                   placeholder="Select a procedure"
-                  options={procedureOptions}
-                  value={formData.interested_procedure}
-                  onChange={(value) => handleInputChange('procedure', value as string)}
+                  options={procedures}
+                  value={formData.interested_procedure_id}
+                  onChange={(value) => handleInputChange('interested_procedure_id', value as string)}
                   error={errors.procedure}
                   required
                 />
@@ -221,9 +248,9 @@ const ConsultationCTA = () => {
                 <Select
                   label="Preferred Doctor"
                   placeholder="Select a surgeon"
-                  options={procedureOptions}
-                  value={formData.preferred_doctor}
-                  onChange={(value) => handleInputChange('procedure', value as string)}
+                  options={preferredDoctors}
+                  value={formData.preferred_doctor_id}
+                  onChange={(value) => handleInputChange('preferred_doctor_id', value as string)}
                   error={errors.procedure}
                   required
                 />
@@ -231,9 +258,9 @@ const ConsultationCTA = () => {
                 <Input
                   label="Preferred Date"
                   type="date"
-                  placeholder="(555) 123-4567"
-                  value={formData.phone}
-                  onChange={(e) => handleInputChange('phone', e.target.value)}
+                  placeholder="dd/mm/yyyy"
+                  value={formData.preferred_date}
+                  onChange={(e) => handleInputChange('preferred_date', e.target.value)}
                   error={errors.phone}
                   required
                 />
@@ -241,9 +268,9 @@ const ConsultationCTA = () => {
                 <Input
                   label="Preferred Time"
                   type="time"
-                  placeholder="(555) 123-4567"
-                  value={formData.phone}
-                  onChange={(e) => handleInputChange('phone', e.target.value)}
+                  placeholder="00:00"
+                  value={formData.preferred_time}
+                  onChange={(e) => handleInputChange('preferred_time', e.target.value)}
                   error={errors.phone}
                   required
                 />

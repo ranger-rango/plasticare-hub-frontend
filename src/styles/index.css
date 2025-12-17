@@ -20,3 +20,26 @@ html {
   top: 20;
   height: calc(100vh - 80px);
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  background-color: #E8B4B8;
+}
+
+tr {
+  border: 1px solid #E8B4B8;
+}
+
+tr:hover {
+  background-color: #F4C2C2;
+  cursor: pointer;
+}
+th, td {
+  padding: .5rem 1rem;
+  text-align: left;
+  overflow-x: auto;
+}

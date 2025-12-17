@@ -10,7 +10,7 @@ const HeroSection = () => {
     {
       title: "Transform with Confidence",
       subtitle: "Where Medical Excellence Meets Aesthetic Artistry",
-      description: "Experience the perfect fusion of clinical precision and luxury wellness at PlastiCare Hub",
+      description: "Patient centred healthcare, medical treatment and advice with excellence in qulity, service and access",
       video: "https://assets.mixkit.co/videos/preview/mixkit-medical-clinic-interior-with-modern-equipment-50633-large.mp4",
       cta: "Book Your Consultation",
       id: "consultation-booking-section"

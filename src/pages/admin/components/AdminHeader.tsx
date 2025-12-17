@@ -1,28 +1,30 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import Icon from '../AppIcon';
-import Button from './Button';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ConsultationModal from 'components/ConsultationModal';
 import FreeEnquiry from 'components/FreeEnquiry';
+import Button from 'components/ui/Button';
+import Icon from 'components/AppIcon';
+import CreateUserModal from './CreateUser';
+import { RbacComponents } from 'components/RBAComponents';
+import { useFormSubmit } from 'components/useFormSubmit';
+import { getUserAuthToken, getUserId } from 'components/RBAC';
+import toast from 'react-hot-toast';
 
-interface HeaderProps {
+interface AdminHeaderProps {
   className?: string;
 }
 
-const Header = ({ className = '' }: HeaderProps) => {
-  const [showConsultationModal, setShowConsultationModal] = useState(false)
-  const [showEnquirynModal, setShowEnquiryModal] = useState(false)
+const AdminHeader = ({ className = '' }: AdminHeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   const location = useLocation();
 
   const navigationItems = [
-    { label: 'Home', path: '/homepage' },
-    { label: 'Procedures', path: '/procedures' },
-    { label: 'Surgeons', path: '/surgeons' },
-    { label: 'Patient Gallery', path: '/patient-gallery' },
-    { label: 'Patient Care', path: '/patient-care' },
-    { label: 'About', path: '/about' },
+    { label: 'Consultations', path: '/dashboard/admin/consultations' },
+    { label: 'Enquiries', path: '/dashboard/admin/enquiries' },
+    { label: 'Tours', path: '/dashboard/admin/tours' },
+    { label: 'Users', path: '/dashboard/admin/users' },
   ];
 
   useEffect(() => {
@@ -44,6 +46,23 @@ const Header = ({ className = '' }: HeaderProps) => {
 
   const isActivePath = (path: string) => location.pathname === path;
 
+  const navigate = useNavigate();
+  const endpoint : string = import.meta.env.VITE_LOGOUT_ENDPOINT;
+  const baseUrl : string = import.meta.env.VITE_BASE_URL;
+  const url : string = baseUrl.concat(endpoint).concat("/").concat(getUserId());
+  const authToken : string = getUserAuthToken();
+  const method : string = "POST";
+  const mutation = useFormSubmit(url, authToken, method);
+  const logoutFunction : any = async () => 
+  {
+    await mutation.mutateAsync({});
+    sessionStorage.clear();
+    localStorage.clear();
+
+    toast.success("Logout Successfull")
+    navigate("/dashboard/admin/login", { replace: true })
+  }
+
   return (
     <>
       <header
@@ -53,7 +72,7 @@ const Header = ({ className = '' }: HeaderProps) => {
       >
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <Link to="/homepage" className="flex items-center space-x-3 group">
+            <Link to="/dashboard/admin" className="flex items-center space-x-3 group">
               <div className="relative">
                 <svg
                   width="48"
@@ -109,28 +128,27 @@ const Header = ({ className = '' }: HeaderProps) => {
                 </Link>
               ))}
             </nav>
-
-            <div className="hidden lg:flex items-center space-x-4">
-              <Button
-                variant="outline"
-                size="default"
-                iconPosition="left"
-                iconSize={18}
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-                onClick={ () => { setShowEnquiryModal(true) } }
-              >
-                Free Enquiry
-              </Button>
+           <div className="hidden lg:flex items-center space-x-4">
+              <RbacComponents
+                allowedRoles={["ADMIN"]}
+                reactElements={
+                  <Button
+                    variant="default"
+                    size="default"
+                    className="bg-primary hover:bg-primary/90 shadow-brand"
+                    onClick={() => { setShowCreateUserModal(true) }}
+                  >
+                    Create User
+                  </Button>
+                }
+              />
               <Button
                 variant="default"
                 size="default"
-                iconName="Calendar"
-                iconPosition="left"
-                iconSize={18}
                 className="bg-primary hover:bg-primary/90 shadow-brand"
-                onClick={ () => { setShowConsultationModal(true) } }
+                onClick={logoutFunction}
               >
-                Book Consultation
+                Logout
               </Button>
             </div>
 
@@ -168,49 +186,33 @@ const Header = ({ className = '' }: HeaderProps) => {
 
             <div className="pt-6 space-y-3 border-t border-border mt-4">
               <Button
-                variant="outline"
-                size="lg"
-                fullWidth
-                iconPosition="left"
-                iconSize={20}
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-                onClick={ () => { setShowEnquiryModal(true) } }
-              >
-                Free Enquiry
-              </Button>
-              <Button
                 variant="default"
                 size="lg"
                 fullWidth
-                iconName="Calendar"
-                iconPosition="left"
-                iconSize={20}
                 className="bg-primary hover:bg-primary/90 shadow-brand"
-                onClick={ () => { setShowConsultationModal(true) } }
+                onClick={() => { setShowCreateUserModal(true) }}
               >
-                Book Consultation
+                Create User
+              </Button>
+              <Button
+                variant="default"
+                size="default"
+                fullWidth
+                className="bg-primary hover:bg-primary/90 shadow-brand"
+                onClick={logoutFunction}
+              >
+                Logout
               </Button>
             </div>
           </nav>
         </div>
+        {
+          showCreateUserModal && 
+          <CreateUserModal onClose={() => { setShowCreateUserModal(false) }} />
+        }
       </header>
-        {showConsultationModal &&
-        <ConsultationModal
-          onClose={() => {
-            setShowConsultationModal(false);
-          }}
-        />
-        }
-
-        {showEnquirynModal &&
-        <FreeEnquiry
-          onClose={() => {
-            setShowEnquiryModal(false);
-          }}
-        />
-        }
     </>
   );
 };
 
-export default Header;
+export default AdminHeader;

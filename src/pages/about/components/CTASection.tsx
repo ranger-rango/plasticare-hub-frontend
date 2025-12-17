@@ -1,12 +1,10 @@
+import { useState } from 'react';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
+import ConsultationModal from 'components/ConsultationModal';
 
-interface CTAProps 
-{
-  onOpen: () => void
-}
-
-const CTASection = ( { onOpen } : CTAProps ) => {
+const CTASection = () => {
+  const [showConsultationModal, setShowConsultationModal] = useState(false);
   return (
     <section className="py-20 lg:py-28 bg-surface">
       <div className="w-full px-4 sm:px-6 lg:px-8">
@@ -32,7 +30,7 @@ const CTASection = ( { onOpen } : CTAProps ) => {
                 iconName="Calendar"
                 iconPosition="left"
                 className="bg-background text-primary hover:bg-background/90 shadow-brand"
-                onClick={onOpen}
+                onClick={() => { setShowConsultationModal(true) }}
               >
                 Schedule Consultation
               </Button>
@@ -116,6 +114,12 @@ const CTASection = ( { onOpen } : CTAProps ) => {
           </div>
         </div>
       </div>
+      {
+        showConsultationModal && 
+        <ConsultationModal 
+        onClose={() => { setShowConsultationModal(false) }}
+        />
+      }
     </section>
   );
 };

@@ -124,7 +124,7 @@ const TrustIndicators = () => {
             <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 rounded-full">
               <Icon name="Shield" size={20} color="var(--color-primary)" />
               <span className="font-body text-sm font-medium text-primary">
-                HIPAA Compliant • Board Certified • Fully Accredited Facility
+                DPA Compliant • Board Certified • Fully Accredited Facility
               </span>
             </div>
           </div>

@@ -66,7 +66,7 @@ export interface FreeEnq {
   name: string;
   email: string;
   phone: string;
-  interestedProcedure: string;
-  infoType: string;
+  interested_procedure_id: string;
+  info_type: string;
   message: string;
 }

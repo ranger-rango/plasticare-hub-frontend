@@ -9,16 +9,11 @@ import CertificationsSection from './components/CertificationsSection';
 import AwardsSection from './components/AwardsSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
-import ConsultationModal from 'components/ConsultationModal';
 
 const About = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const [showConsultationModal, setShowConsultationModal] = useState(false)
-  const handleSubmit : any = () => 
-  {}
 
   return (
     <div className="min-h-screen bg-background">
@@ -31,15 +26,7 @@ const About = () => {
         <TeamSection />
         <CertificationsSection />
         <AwardsSection />
-        <CTASection onOpen={ () => { setShowConsultationModal(true) } }/>
-
-        {showConsultationModal &&
-        <ConsultationModal
-          onClose={() => {
-            setShowConsultationModal(false);
-          }}
-          onSubmit={handleSubmit} />
-        }
+        <CTASection />
       </main>
       <Footer />
     </div>

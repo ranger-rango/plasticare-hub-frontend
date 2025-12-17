@@ -64,12 +64,12 @@ export interface ComparisonProcedure {
 }
 
 export interface VirtualConsultation {
-  procedureId: string;
   name: string;
   email: string;
   phone: string;
-  preferredDoctor: string;
-  preferredDate: string;
-  preferredTime: string;
+  interested_procedure_id: string;
+  preferred_doctor_id: string;
+  preferred_date: string;
+  preferred_time: string;
   message: string;
 }

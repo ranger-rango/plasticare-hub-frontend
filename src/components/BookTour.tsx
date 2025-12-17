@@ -1,48 +1,36 @@
 import { useState } from 'react';
-import { VirtualConsultation } from '../types';
-import Icon from '../../../components/AppIcon';
-import Button from '../../../components/ui/Button';
-import Input from '../../../components/ui/Input';
+import Icon from './AppIcon';
+import Button from './ui/Button';
+import Input from './ui/Input';
 import Select from 'components/ui/Select';
-import { plasticareSurgeons } from '../../../../data/surgeons';
-import { useFormSubmit } from 'components/useFormSubmit';
+import { plasticareProcedures } from '../../data/procedures';
+import { useFormSubmit } from './useFormSubmit';
+import { BookTour } from 'pages/about/types';
 
-interface ConsultationModalProps {
-  procedureName: string;
-  procedureId: string;
+interface BookTourModalProps {
   onClose: () => void;
 }
 
-const ConsultationModal = ({
-  procedureName,
-  procedureId,
-  onClose
-}: ConsultationModalProps) => {
-  const [formData, setFormData] = useState<VirtualConsultation>({
+const BookTourModal = ({ onClose }: BookTourModalProps) => {
+  const [formData, setFormData] = useState<BookTour>({
     name: '',
     email: '',
     phone: '',
-    interested_procedure_id: procedureId,
-    preferred_doctor_id: '',
     preferred_date: '',
     preferred_time: '',
     message: ''
   });
 
-  const preferredDoctors = plasticareSurgeons.map((surgeon) => (
+  const procedures = plasticareProcedures.map((proc) => (
     {
-      value: surgeon.id,
-      label: surgeon.name
+      value: proc.id,
+      label: proc.name
     }
-  ));
+  ))
 
-  const interestedProcedure = [
-    { value: procedureId, label: procedureName }
-  ];
+  const [errors, setErrors] = useState<Partial<Record<keyof BookTour, string>>>({});
 
-  const [errors, setErrors] = useState<Partial<Record<keyof VirtualConsultation, string>>>({});
-
-  const handleChange = (field: keyof VirtualConsultation, value: string) => {
+  const handleChange = (field: keyof BookTour, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: '' }));
@@ -50,7 +38,7 @@ const ConsultationModal = ({
   };
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<Record<keyof VirtualConsultation, string>> = {};
+    const newErrors: Partial<Record<keyof BookTour, string>> = {};
 
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
@@ -66,19 +54,11 @@ const ConsultationModal = ({
       newErrors.phone = 'Phone number is required';
     }
 
-    if (!formData.preferred_date) {
-      newErrors.preferred_date = 'Preferred date is required';
-    }
-
-    if (!formData.preferred_time) {
-      newErrors.preferred_time = 'Preferred time is required';
-    }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const endpoint : string = import.meta.env.VITE_BOOK_CONSULTATION_ENDPOINT;
+  const endpoint : string = import.meta.env.VITE_BOOK_TOUR_ENDPOINT;
   const baseUrl : string = import.meta.env.VITE_BASE_URL
   const url : string = baseUrl.concat(endpoint)
   const authToken : string = "GUEST";
@@ -90,6 +70,7 @@ const ConsultationModal = ({
     if (!validateForm()) {
       return;
     }
+
     setTimeout(() => {
       const frmData = new FormData();
       Object.entries(formData).forEach(([key, value]) => 
@@ -109,8 +90,6 @@ const ConsultationModal = ({
         name: '',
         email: '',
         phone: '',
-        interested_procedure_id: '',
-        preferred_doctor_id: '',
         preferred_date: '',
         preferred_time: '',
         message: ''
@@ -133,15 +112,12 @@ const ConsultationModal = ({
         <div className="overflow-y-auto max-h-[90vh]">
           <div className="p-8">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                <Icon name="Calendar" size={24} className="text-primary" />
-              </div>
               <div>
                 <h2 className="font-headline text-2xl font-bold text-text-primary">
-                  Book Virtual Consultation
+                  Get Free Enquiry
                 </h2>
-                <p className="font-body text-sm text-text-secondary">
-                  For {procedureName}
+                <p>
+                   Get expert answers to your questions about procedures, pricing, recovery, and more. Our patient coordinators will provide detailed information to help you make an informed decision. 
                 </p>
               </div>
             </div>
@@ -179,44 +155,25 @@ const ConsultationModal = ({
                 />
               </div>
 
-                <Select
-                  label="Interested Procedure"
-                  placeholder="Select a procedure"
-                  options={interestedProcedure}
-                  value={formData.interested_procedure_id}
-                  required
-                  disabled
-                />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <Input
+                        label="Preferred Date"
+                        type="date"
+                        value={formData.preferred_date}
+                        onChange={(e) => handleChange('preferred_date', e.target.value)}
+                        error={errors.preferred_date}
+                        required
+                    />
 
-                <Select
-                  label="Preferred Doctor"
-                  placeholder="Select a surgeon"
-                  options={preferredDoctors}
-                  value={formData.preferred_doctor_id}
-                  onChange={(value) => handleChange('preferred_doctor_id', value as string)}
-                  error={errors.preferred_doctor_id}
-                  required
-                />
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input
-                  label="Preferred Date"
-                  type="date"
-                  value={formData.preferred_date}
-                  onChange={(e) => handleChange('preferred_date', e.target.value)}
-                  error={errors.preferred_date}
-                  required
-                />
-
-                <Input
-                  label="Preferred Time"
-                  type="time"
-                  value={formData.preferred_time}
-                  onChange={(e) => handleChange('preferred_time', e.target.value)}
-                  error={errors.preferred_time}
-                  required
-                />
-              </div>
+                    <Input
+                        label="Preferred Time"
+                        type="time"
+                        value={formData.preferred_time}
+                        onChange={(e) => handleChange('preferred_time', e.target.value)}
+                        error={errors.preferred_time}
+                        required
+                    />
+                </div>
 
               <div>
                 <label className="block font-body text-sm font-medium text-text-primary mb-2">
@@ -229,20 +186,6 @@ const ConsultationModal = ({
                   rows={4}
                   className="w-full px-4 py-3 bg-surface border border-border rounded-xl font-body text-sm text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-brand resize-none"
                 />
-              </div>
-
-              <div className="p-4 bg-secondary/10 rounded-xl border border-secondary/30">
-                <div className="flex items-start space-x-3">
-                  <Icon name="Info" size={20} className="text-primary mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="font-body text-sm font-medium text-text-primary mb-1">
-                      What to Expect
-                    </p>
-                    <p className="font-body text-xs text-text-secondary">
-                      Our team will review your request and contact you within 24 hours to confirm your consultation appointment. Virtual consultations typically last 30-45 minutes.
-                    </p>
-                  </div>
-                </div>
               </div>
 
               <div className="flex items-center space-x-4 pt-4">
@@ -267,8 +210,9 @@ const ConsultationModal = ({
                   Submit Request
                 </Button>
               </div>
+
                 <p className="font-body text-xs text-text-secondary text-center">
-                  By submitting this form, you agree to our Privacy Policy and Terms of Service. Your information is secure and confidential.
+                    By submitting this form, you agree to our Privacy Policy and Terms of Service. Your information is secure and confidential.
                 </p>
             </form>
           </div>
@@ -278,4 +222,4 @@ const ConsultationModal = ({
   );
 };
 
-export default ConsultationModal;
+export default BookTourModal;

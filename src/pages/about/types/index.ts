@@ -82,3 +82,12 @@ export interface VirtualTourStop {
     description: string;
   }[];
 }
+
+export interface BookTour {
+  name: string;
+  email: string;
+  phone: string;
+  preferred_date: string;
+  preferred_time: string;
+  message: string;
+}

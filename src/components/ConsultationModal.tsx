@@ -4,48 +4,40 @@ import Icon from './AppIcon';
 import Button from './ui/Button';
 import Input from './ui/Input';
 import Select from 'components/ui/Select';
+import { plasticareSurgeons } from '../../data/surgeons';
+import { plasticareProcedures } from '../../data/procedures';
+import { useFormSubmit } from './useFormSubmit';
 
 interface ConsultationModalProps {
   onClose: () => void;
-  onSubmit: (data: Consultation) => void;
 }
 
-const ConsultationModal = ({
-  onClose,
-  onSubmit
-}: ConsultationModalProps) => {
+const ConsultationModal = ({ onClose }: ConsultationModalProps) => {
   const [formData, setFormData] = useState<Consultation>({
     name: '',
     email: '',
     phone: '',
-    interestedProcedure: '',
-    preferredDoctor: '',
-    preferredDate: '',
-    preferredTime: '',
+    interested_procedure_id: '',
+    preferred_doctor_id: '',
+    preferred_date: '',
+    preferred_time: '',
     message: ''
   });
 
-  const procedures = [
-    { value: 'rhinoplasty', label: 'Rhinoplasty' },
-    { value: 'breast-augmentation', label: 'Breast Augmentation' },
-    { value: 'liposuction', label: 'Liposuction' },
-    { value: 'facelift', label: 'Facelift' },
-    { value: 'tummy-tuck', label: 'Tummy Tuck' },
-    { value: 'eyelid-surgery', label: 'Eyelid Surgery' },
-    { value: 'botox-fillers', label: 'Botox & Fillers' },
-    { value: 'other', label: 'Other / Not Sure' }
-  ];
+  const procedures = plasticareProcedures.map((proc) => (
+    {
+      value: proc.id,
+      label: proc.name
+    }
+  ))
 
-  const preferredDoctors = [
-    { value: 'rhinoplasty', label: 'Rhinoplasty' },
-    { value: 'breast-augmentation', label: 'Breast Augmentation' },
-    { value: 'liposuction', label: 'Liposuction' },
-    { value: 'facelift', label: 'Facelift' },
-    { value: 'tummy-tuck', label: 'Tummy Tuck' },
-    { value: 'eyelid-surgery', label: 'Eyelid Surgery' },
-    { value: 'botox-fillers', label: 'Botox & Fillers' },
-    { value: 'other', label: 'Other / Not Sure' }
-  ];
+  const preferredDoctors = plasticareSurgeons.map((surgeon) => (
+    {
+      value: surgeon.id,
+      label: surgeon.name
+    }
+  ));
+  
   const [errors, setErrors] = useState<Partial<Record<keyof Consultation, string>>>({});
 
   const handleChange = (field: keyof Consultation, value: string) => {
@@ -72,23 +64,58 @@ const ConsultationModal = ({
       newErrors.phone = 'Phone number is required';
     }
 
-    if (!formData.preferredDate) {
-      newErrors.preferredDate = 'Preferred date is required';
+    if (!formData.preferred_date) {
+      newErrors.preferred_date = 'Preferred date is required';
     }
 
-    if (!formData.preferredTime) {
-      newErrors.preferredTime = 'Preferred time is required';
+    if (!formData.preferred_time) {
+      newErrors.preferred_time = 'Preferred time is required';
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  const endpoint : string = import.meta.env.VITE_BOOK_CONSULTATION_ENDPOINT;
+  const baseUrl : string = import.meta.env.VITE_BASE_URL
+  const url : string = baseUrl.concat(endpoint)
+  const authToken : string = "GUEST";
+  const method : string = "POST";
+  const mutation = useFormSubmit(url, authToken, method);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      onSubmit(formData);
+    if (!validateForm()) {
+      return;
     }
+
+    setTimeout(() => {
+      const frmData = new FormData();
+      Object.entries(formData).forEach(([key, value]) => 
+      {
+        frmData.append(key, value as string);
+      })
+      mutation.mutate(frmData, 
+        {
+          onSuccess: (responseData) => 
+          {
+            alert('Thank you for your interest! Our team will contact you within 24 hours to schedule your consultation.');
+          }
+        }
+      )
+
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        interested_procedure_id: '',
+        preferred_doctor_id: '',
+        preferred_date: '',
+        preferred_time: '',
+        message: ''
+      });
+
+    }, 1500);
   };
 
   return (
@@ -152,9 +179,9 @@ const ConsultationModal = ({
                   label="Procedure of Interest"
                   placeholder="Select a procedure"
                   options={procedures}
-                  value={formData.interestedProcedure}
-                  onChange={(value) => handleChange('interestedProcedure', value as string)}
-                  error={errors.preferredDoctor}
+                  value={formData.interested_procedure_id}
+                  onChange={(value) => handleChange('interested_procedure_id', value as string)}
+                  error={errors.interested_procedure_id}
                   required
                 />
 
@@ -162,9 +189,9 @@ const ConsultationModal = ({
                   label="Preferred Doctor"
                   placeholder="Select a surgeon"
                   options={preferredDoctors}
-                  value={formData.preferredDoctor}
-                  onChange={(value) => handleChange('preferredDoctor', value as string)}
-                  error={errors.preferredDoctor}
+                  value={formData.preferred_doctor_id}
+                  onChange={(value) => handleChange('preferred_doctor_id', value as string)}
+                  error={errors.preferred_doctor_id}
                   required
                 />
 
@@ -172,18 +199,18 @@ const ConsultationModal = ({
                 <Input
                   label="Preferred Date"
                   type="date"
-                  value={formData.preferredDate}
-                  onChange={(e) => handleChange('preferredDate', e.target.value)}
-                  error={errors.preferredDate}
+                  value={formData.preferred_date}
+                  onChange={(e) => handleChange('preferred_date', e.target.value)}
+                  error={errors.preferred_date}
                   required
                 />
 
                 <Input
                   label="Preferred Time"
                   type="time"
-                  value={formData.preferredTime}
-                  onChange={(e) => handleChange('preferredTime', e.target.value)}
-                  error={errors.preferredTime}
+                  value={formData.preferred_time}
+                  onChange={(e) => handleChange('preferred_time', e.target.value)}
+                  error={errors.preferred_time}
                   required
                 />
               </div>

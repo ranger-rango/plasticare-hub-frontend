@@ -4,35 +4,29 @@ import Icon from './AppIcon';
 import Button from './ui/Button';
 import Input from './ui/Input';
 import Select from 'components/ui/Select';
+import { plasticareProcedures } from '../../data/procedures';
+import { useFormSubmit } from './useFormSubmit';
 
 interface FreeEnquiryProps {
   onClose: () => void;
-  onSubmit: (data: FreeEnq) => void;
 }
 
-const FreeEnquiry = ({
-  onClose,
-  onSubmit
-}: FreeEnquiryProps) => {
+const FreeEnquiry = ({ onClose }: FreeEnquiryProps) => {
   const [formData, setFormData] = useState<FreeEnq>({
     name: '',
     email: '',
     phone: '',
-    interestedProcedure: '',
-    infoType: '',
+    interested_procedure_id: '',
+    info_type: '',
     message: ''
   });
 
-  const procedures = [
-    { value: 'rhinoplasty', label: 'Rhinoplasty' },
-    { value: 'breast-augmentation', label: 'Breast Augmentation' },
-    { value: 'liposuction', label: 'Liposuction' },
-    { value: 'facelift', label: 'Facelift' },
-    { value: 'tummy-tuck', label: 'Tummy Tuck' },
-    { value: 'eyelid-surgery', label: 'Eyelid Surgery' },
-    { value: 'botox-fillers', label: 'Botox & Fillers' },
-    { value: 'other', label: 'Other / Not Sure' }
-  ];
+  const procedures = plasticareProcedures.map((proc) => (
+    {
+      value: proc.id,
+      label: proc.name
+    }
+  ))
 
   const infoTypes = [
     { value: 'general_information', label: 'General Information' },
@@ -74,11 +68,44 @@ const FreeEnquiry = ({
     return Object.keys(newErrors).length === 0;
   };
 
+  const endpoint : string = import.meta.env.VITE_SEND_ENQUIRY_ENDPOINT;
+  const baseUrl : string = import.meta.env.VITE_BASE_URL
+  const url : string = baseUrl.concat(endpoint)
+  const authToken : string = "GUEST";
+  const method : string = "POST";
+  const mutation = useFormSubmit(url, authToken, method);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      onSubmit(formData);
+    if (!validateForm()) {
+      return;
     }
+
+    setTimeout(() => {
+      const frmData = new FormData();
+      Object.entries(formData).forEach(([key, value]) => 
+      {
+        frmData.append(key, value as string);
+      })
+      mutation.mutate(frmData, 
+        {
+          onSuccess: (responseData) => 
+          {
+            alert('Thank you for your interest! Our team will contact you within 24 hours to schedule your consultation.');
+          }
+        }
+      )
+
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        interested_procedure_id: '',
+        info_type: '',
+        message: ''
+      });
+
+    }, 1500);
   };
 
   return (
@@ -143,9 +170,9 @@ const FreeEnquiry = ({
                     label="Procedure of Interest"
                     placeholder="Select a procedure"
                     options={procedures}
-                    value={formData.interestedProcedure}
-                    onChange={(value) => handleChange('interestedProcedure', value as string)}
-                    error={errors.interestedProcedure}
+                    value={formData.interested_procedure_id}
+                    onChange={(value) => handleChange('interested_procedure_id', value as string)}
+                    error={errors.interested_procedure_id}
                     required
                     />
 
@@ -153,9 +180,9 @@ const FreeEnquiry = ({
                     label="Type of Information"
                     placeholder="What info do you need"
                     options={infoTypes}
-                    value={formData.infoType}
-                    onChange={(value) => handleChange('infoType', value as string)}
-                    error={errors.infoType}
+                    value={formData.info_type}
+                    onChange={(value) => handleChange('info_type', value as string)}
+                    error={errors.info_type}
                     required
                     />
                 </div>

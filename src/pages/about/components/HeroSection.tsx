@@ -2,9 +2,11 @@ import { useState } from 'react';
 import Image from '../../../components/AppImage';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
+import BookTourModal from 'components/BookTour';
 
 const HeroSection = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [showBookTourModal, setShowBookTourModal] = useState(false)
 
   return (
     <section className="relative min-h-[600px] lg:min-h-[700px] flex items-center justify-center overflow-hidden">
@@ -41,8 +43,9 @@ const HeroSection = () => {
               size="lg"
               iconName="Calendar"
               iconPosition="left"
-              className="bg-primary hover:bg-primary/90 shadow-brand">
-
+              className="bg-primary hover:bg-primary/90 shadow-brand"
+              onClick={() => { setShowBookTourModal(true)} }
+              >
               Schedule Facility Tour
             </Button>
             <Button
@@ -79,6 +82,13 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+        {showBookTourModal &&
+          <BookTourModal
+            onClose={() => {
+              setShowBookTourModal(false);
+            }}
+          />
+        }
     </section>);
 
 };
