@@ -538,9 +538,9 @@ export const plasticareProcedures : any[] = [
     beforeAfterImages: [
       {
         id: 'ba11',
-        beforeImage: "https://img.rocket.new/generatedImages/rocket_gen_img_1ffe498e9-1764663240453.png",
+        beforeImage: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/cheiloplasty-before.jpg",
         beforeAlt: 'Front view before lip reduction showing large lips',
-        afterImage: "https://img.rocket.new/generatedImages/rocket_gen_img_118c32215-1764669220074.png",
+        afterImage: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/cheiloplasty-before.jpg",
         afterAlt: 'Front view after lip reduction with balanced proportions',
         timeframe: '3 months post-op',
         procedureName: 'Lip Reduction'
