@@ -5,25 +5,25 @@ const CredentialsSection = () => {
   const certifications = [
   {
     name: "Kenya Medical Practioners and Dentists Council",
-    logo: "https://img.rocket.new/generatedImages/rocket_gen_img_14c7832cc-1764743292100.png",
+    logo: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/kmpdc.png",
     alt: "American Board of Plastic Surgery certification seal with blue and gold emblem",
     description: "Board-certified by the only plastic surgery board recognized by the American Board of Medical Specialties"
   },
   {
     name: "Kenya Society of Plastic, Reconstructive and Aesthetic Surgeons",
-    logo: "https://img.rocket.new/generatedImages/rocket_gen_img_1114ff196-1764923031976.png",
+    logo: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/kspras.png",
     alt: "American Society of Plastic Surgeons membership badge with red and white design",
     description: "Active members of the world's largest organization of board-certified plastic surgeons"
   },
   {
     name: "Pharmacy and Poisons Board",
-    logo: "https://img.rocket.new/generatedImages/rocket_gen_img_17d3167ec-1765003962002.png",
+    logo: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/ppb.png",
     alt: "American College of Surgeons fellowship emblem with traditional medical caduceus symbol",
     description: "Fellows of the prestigious American College of Surgeons demonstrating surgical excellence"
   },
   {
     name: "Kenya Health Professions Oversight Authority",
-    logo: "https://img.rocket.new/generatedImages/rocket_gen_img_16ac90f11-1765003959198.png",
+    logo: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/khpoa.jpg",
     alt: "International Society of Aesthetic Plastic Surgery global membership badge",
     description: "Members of the leading international organization for aesthetic plastic surgery"
   }];
@@ -75,7 +75,7 @@ const CredentialsSection = () => {
                 <Image
                 src={cert.logo}
                 alt={cert.alt}
-                className="w-full h-full object-cover" />
+                className="w-full h-full object-fit" />
 
               </div>
               <h4 className="font-body text-sm font-semibold text-text-primary mb-2">
