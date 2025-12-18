@@ -24,7 +24,7 @@ const Routes: React.FC = () => {
         <ScrollToTop />
         <RouterRoutes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/patient-care" element={<PatientCare />} />
+        {/* <Route path="/patient-care" element={<PatientCare />} /> */}
         <Route path="/procedures" element={<ProceduresPage />} />
         <Route path="/surgeons" element={<SurgeonsPage />} />
         <Route path="/patient-gallery" element={<PatientGallery />} />

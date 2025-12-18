@@ -21,7 +21,7 @@ const Header = ({ className = '' }: HeaderProps) => {
     { label: 'Procedures', path: '/procedures' },
     { label: 'Surgeons', path: '/surgeons' },
     { label: 'Patient Gallery', path: '/patient-gallery' },
-    { label: 'Patient Care', path: '/patient-care' },
+    // { label: 'Patient Care', path: '/patient-care' },
     { label: 'About', path: '/about' },
   ];
 

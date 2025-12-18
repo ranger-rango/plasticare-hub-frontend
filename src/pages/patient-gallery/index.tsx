@@ -462,10 +462,10 @@ const PatientGallery = () => {
                     <Button
                       variant="default"
                       fullWidth
-                      iconName="Send"
+                      iconName="Phone"
                       iconPosition="left"
                       className="bg-primary hover:bg-primary/90">
-                      Submit Your Story
+                      Call Us Today (555) 123-4567
                     </Button>
                   </div>
                 </div>
@@ -497,7 +497,7 @@ const PatientGallery = () => {
         onClose={() => {
           setShowConsultationModal(false);
         }}
-        onSubmit={handleSubmit} />
+      />
       }
 
     </>);
