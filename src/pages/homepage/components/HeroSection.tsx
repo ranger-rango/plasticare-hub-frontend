@@ -11,7 +11,7 @@ const HeroSection = () => {
       title: "Transform with Confidence",
       subtitle: "Where Medical Excellence Meets Aesthetic Artistry",
       description: "Patient centred healthcare, medical treatment and advice with excellence in qulity, service and access",
-      video: "https://assets.mixkit.co/videos/preview/mixkit-medical-clinic-interior-with-modern-equipment-50633-large.mp4",
+      video: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/landing1.png",
       cta: "Book Your Consultation",
       id: "consultation-booking-section"
     },
@@ -19,7 +19,7 @@ const HeroSection = () => {
       title: "Your Journey to Confidence",
       subtitle: "Expert Care, Beautiful Results",
       description: "Board-certified surgeons specializing in transformative aesthetic and reconstructive procedures",
-      video: "https://assets.mixkit.co/videos/preview/mixkit-woman-getting-a-facial-treatment-at-a-spa-50634-large.mp4",
+      video: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/landing2.png",
       cta: "Explore Procedures",
       id: "featured-procedures-section"
     },
@@ -27,7 +27,7 @@ const HeroSection = () => {
       title: "Empowerment Through Excellence",
       subtitle: "Personalized Care, Exceptional Outcomes",
       description: "State-of-the-art facility combining medical expertise with luxury hospitality",
-      video: "https://assets.mixkit.co/videos/preview/mixkit-medical-professional-reviewing-patient-records-50635-large.mp4",
+      video: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/landing3.png",
       cta: "Meet Our Surgeons",
       id: "surgeon-spotlight-section"
     }
@@ -68,7 +68,7 @@ const HeroSection = () => {
               muted
               playsInline
               className="w-full h-full object-cover"
-              poster="https://images.pexels.com/photos/3845653/pexels-photo-3845653.jpeg"
+              poster={slide.video}
             >
               <source src={slide.video} type="video/mp4" />
             </video>
