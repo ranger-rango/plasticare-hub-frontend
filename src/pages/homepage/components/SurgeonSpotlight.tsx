@@ -11,7 +11,7 @@ const SurgeonSpotlight = () => {
     name: "Prof. Stanley Khainga",
     title: "MD",
     specialization: "Plastic Surgery",
-    image: "https://img.rocket.new/generatedImages/rocket_gen_img_13e230637-1763294730820.png",
+    image: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/stanley-khainga.jpg",
     alt: "Prof. Stanley Khainga, board-certified plastic surgeon.",
     experience: "25+ years",
     certifications: []
@@ -21,7 +21,7 @@ const SurgeonSpotlight = () => {
     name: "Dr. Michael Ongas",
     title: "MD",
     specialization: "Plastic Surgery",
-    image: "https://img.rocket.new/generatedImages/rocket_gen_img_13dd48aac-1763299863851.png",
+    image: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/DR.%20MICHAEL.jpg",
     alt: "Dr. Michael Ongas, board-certified plastic surgeon.",
     experience: "6+ years",
     certifications: []
@@ -31,7 +31,7 @@ const SurgeonSpotlight = () => {
     name: "Dr. Evans Spanton Masitara",
     title: "MD",
     specialization: "Plastic Surgery",
-    image: "https://img.rocket.new/generatedImages/rocket_gen_img_10f32ae74-1764872614047.png",
+    image: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/DR.%20EVANS.jpg",
     alt: "Dr. Evans Spanton Masitara, board-certified plastic surgeon.",
     experience: "10+ years",
     certifications: []
@@ -63,7 +63,7 @@ const SurgeonSpotlight = () => {
                   alt={surgeon.alt}
                   className="w-full h-full object-cover group-hover:scale-105 transition-confident" />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <h3 className="font-headline text-2xl font-bold text-white mb-1">
                       {surgeon.name}

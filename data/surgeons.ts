@@ -4,7 +4,7 @@ export const plasticareSurgeons : any[] = [
     name: "Prof. Stanley Khainga",
     title: "Board-Certified Plastic Surgeon",
     specialization: [],
-    image: "https://img.rocket.new/generatedImages/rocket_gen_img_17f8f3366-1763293591953.png",
+    image: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/stanley-khainga.jpg",
     alt: "Prof. Stanley Khainga, board certified plastic surgeon",
     yearsOfExperience: 25,
     education: [
@@ -67,7 +67,7 @@ export const plasticareSurgeons : any[] = [
     name: "Dr. Michael Ongas",
     title: "Board-Certified Plastic Surgeon",
     specialization: [],
-    image: "https://img.rocket.new/generatedImages/rocket_gen_img_1b36cae89-1763294738662.png",
+    image: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/DR.%20MICHAEL.jpg",
     alt: "Dr. Michael Ongas, board-certified plastic surgeon.",
     yearsOfExperience: 6,
     education: [
@@ -129,7 +129,7 @@ export const plasticareSurgeons : any[] = [
     name: "Dr. Evans Spanton Masitara",
     title: "Board-Certified Plastic Surgeon",
     specialization: [],
-    image: "https://img.rocket.new/generatedImages/rocket_gen_img_12f3c1bee-1764790614892.png",
+    image: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/DR.%20EVANS.jpg",
     alt: "Dr. Evans Spanton Masitara, board-certified plastic surgeon.",
     yearsOfExperience: 12,
     education: [

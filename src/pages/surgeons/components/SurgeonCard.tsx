@@ -17,7 +17,7 @@ const SurgeonCard = ({ surgeon }: SurgeonCardProps) => {
           alt={surgeon.alt}
           className="w-full h-full object-cover transition-confident group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6">
           <div className="flex items-center space-x-2 mb-2">
             <Icon name="Award" size={20} className="text-primary" />

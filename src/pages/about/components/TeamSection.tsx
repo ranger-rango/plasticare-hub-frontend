@@ -12,7 +12,7 @@ const TeamSection = () => {
     'Board Certified Plastic Surgeon',
     '25+ years experience'],
 
-    image: "https://img.rocket.new/generatedImages/rocket_gen_img_155748a5d-1763296653785.png",
+    image: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/stanley-khainga.jpg",
     alt: 'Prof. Stanley Khainga, board-certified plastic surgeon.',
     bio: 'Prof. Stanley Khainga brings over 25 years of expertise in aesthetic and reconstructive surgery. His patient-centered approach combines technical precision with artistic vision, ensuring natural-looking results that enhance confidence.',
     specializations: []
@@ -25,7 +25,7 @@ const TeamSection = () => {
     'Board Certified Plastic Surgeon',
     '6+ years experience'],
 
-    image: "https://img.rocket.new/generatedImages/rocket_gen_img_1862ff89d-1763292828964.png",
+    image: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/DR.%20MICHAEL.jpg",
     alt: 'Dr. Michael Ongas, board-certified plastic surgeon.',
     bio: 'Dr. Michael Ongas is renowned for his meticulous approach.',
     specializations: []
@@ -38,7 +38,7 @@ const TeamSection = () => {
     'Board Certified Plastic Surgeon',
     '10+ years experience'],
 
-    image: "https://img.rocket.new/generatedImages/rocket_gen_img_105683bec-1763294732433.png",
+    image: "https://raw.githubusercontent.com/ranger-rango/plasticare-hub-frontend/refs/heads/main/src/assets/images/DR.%20EVANS.jpg",
     alt: 'Dr. Evans Spanton Masitara, board-certified plastic surgeon.',
     bio: 'Dr. Evans Spanton Masitara brings over 10 years of expertise in aesthetic and reconstructive surgery. His patient-centered approach combines technical precision with artistic vision, ensuring natural-looking results that enhance confidence.',
     specializations: []
@@ -77,7 +77,7 @@ const TeamSection = () => {
                   alt={member.alt}
                   className="w-full h-full object-cover group-hover:scale-105 transition-confident" />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <h3 className="font-headline text-xl font-bold text-background mb-1">
                       {member.name}
