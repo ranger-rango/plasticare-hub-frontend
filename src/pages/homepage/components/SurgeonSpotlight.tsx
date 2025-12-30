@@ -8,45 +8,33 @@ const SurgeonSpotlight = () => {
   const surgeons: Surgeon[] = [
   {
     id: "1",
-    name: "Dr. Emily Anderson",
-    title: "MD, FACS",
-    specialization: "Facial Plastic Surgery",
+    name: "Prof. Stanley Khainga",
+    title: "MD",
+    specialization: "Plastic Surgery",
     image: "https://img.rocket.new/generatedImages/rocket_gen_img_13e230637-1763294730820.png",
-    alt: "Dr. Emily Anderson, board-certified facial plastic surgeon in white medical coat smiling professionally",
-    experience: "15+ years",
-    certifications: [
-    "American Board of Plastic Surgery",
-    "American Society of Plastic Surgeons",
-    "International Society of Aesthetic Plastic Surgery"]
-
+    alt: "Prof. Stanley Khainga, board-certified plastic surgeon.",
+    experience: "25+ years",
+    certifications: []
   },
   {
     id: "2",
-    name: "Dr. Michael Chen",
-    title: "MD, FACS",
-    specialization: "Body Contouring & Reconstruction",
+    name: "Dr. Michael Ongas",
+    title: "MD",
+    specialization: "Plastic Surgery",
     image: "https://img.rocket.new/generatedImages/rocket_gen_img_13dd48aac-1763299863851.png",
-    alt: "Dr. Michael Chen, board-certified plastic surgeon specializing in body contouring in professional medical attire",
-    experience: "18+ years",
-    certifications: [
-    "American Board of Plastic Surgery",
-    "American Society for Aesthetic Plastic Surgery",
-    "Fellow of American College of Surgeons"]
-
+    alt: "Dr. Michael Ongas, board-certified plastic surgeon.",
+    experience: "6+ years",
+    certifications: []
   },
   {
     id: "3",
-    name: "Dr. Sarah Martinez",
-    title: "MD, FACS",
-    specialization: "Breast Surgery & Aesthetics",
+    name: "Dr. Evans Spanton Masitara",
+    title: "MD",
+    specialization: "Plastic Surgery",
     image: "https://img.rocket.new/generatedImages/rocket_gen_img_10f32ae74-1764872614047.png",
-    alt: "Dr. Sarah Martinez, expert breast surgeon in white coat with stethoscope in modern medical office",
-    experience: "12+ years",
-    certifications: [
-    "American Board of Plastic Surgery",
-    "American Society of Plastic Surgeons",
-    "Breast Surgery Specialist Certification"]
-
+    alt: "Dr. Evans Spanton Masitara, board-certified plastic surgeon.",
+    experience: "10+ years",
+    certifications: []
   }];
 
 

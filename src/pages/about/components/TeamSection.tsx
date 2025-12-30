@@ -6,122 +6,42 @@ const TeamSection = () => {
   const teamMembers: StaffMember[] = [
   {
     id: '1',
-    name: 'Dr. Sarah Mitchell',
-    role: 'Chief Medical Officer & Lead Plastic Surgeon',
+    name: 'Prof. Stanely Khainga',
+    role: 'Plastic Surgeon',
     qualifications: [
-    'MD, Harvard Medical School',
     'Board Certified Plastic Surgeon',
-    'Fellow, American College of Surgeons',
-    '15+ years experience'],
+    '25+ years experience'],
 
     image: "https://img.rocket.new/generatedImages/rocket_gen_img_155748a5d-1763296653785.png",
-    alt: 'Dr. Sarah Mitchell, Chief Medical Officer, professional portrait in white medical coat with stethoscope',
-    bio: 'Dr. Mitchell brings over 15 years of expertise in aesthetic and reconstructive surgery. Her patient-centered approach combines technical precision with artistic vision, ensuring natural-looking results that enhance confidence.',
-    specializations: [
-    'Facial Rejuvenation',
-    'Body Contouring',
-    'Breast Surgery',
-    'Reconstructive Procedures']
-
+    alt: 'Prof. Stanley Khainga, board-certified plastic surgeon.',
+    bio: 'Prof. Stanley Khainga brings over 25 years of expertise in aesthetic and reconstructive surgery. His patient-centered approach combines technical precision with artistic vision, ensuring natural-looking results that enhance confidence.',
+    specializations: []
   },
   {
     id: '2',
-    name: 'Dr. Michael Chen',
-    role: 'Senior Facial Plastic Surgeon',
+    name: 'Dr. Michael Ongas',
+    role: 'Plastic Surgeon',
     qualifications: [
-    'MD, Johns Hopkins University',
-    'Board Certified Facial Plastic Surgeon',
-    'Rhinoplasty Specialist',
-    '12+ years experience'],
+    'Board Certified Plastic Surgeon',
+    '6+ years experience'],
 
     image: "https://img.rocket.new/generatedImages/rocket_gen_img_1862ff89d-1763292828964.png",
-    alt: 'Dr. Michael Chen, Senior Facial Plastic Surgeon, professional headshot in surgical scrubs',
-    bio: 'Specializing in facial aesthetics, Dr. Chen is renowned for his meticulous approach to rhinoplasty and facial rejuvenation. His work has been featured in leading medical journals.',
-    specializations: [
-    'Rhinoplasty',
-    'Facelift',
-    'Eyelid Surgery',
-    'Non-Surgical Treatments']
-
+    alt: 'Dr. Michael Ongas, board-certified plastic surgeon.',
+    bio: 'Dr. Michael Ongas is renowned for his meticulous approach.',
+    specializations: []
   },
   {
     id: '3',
-    name: 'Dr. Emily Rodriguez',
-    role: 'Body Contouring Specialist',
+    name: 'Dr. Evans Spanton Masitara',
+    role: 'Plastic Surgeon',
     qualifications: [
-    'MD, Stanford Medical School',
     'Board Certified Plastic Surgeon',
-    'VASER Liposuction Expert',
     '10+ years experience'],
 
     image: "https://img.rocket.new/generatedImages/rocket_gen_img_105683bec-1763294732433.png",
-    alt: 'Dr. Emily Rodriguez, Body Contouring Specialist, professional portrait in medical attire',
-    bio: 'Dr. Rodriguez is a pioneer in advanced body contouring techniques. Her expertise in VASER liposuction and body sculpting has helped thousands achieve their ideal physique.',
-    specializations: [
-    'Liposuction',
-    'Tummy Tuck',
-    'Brazilian Butt Lift',
-    'Body Lift Procedures']
-
-  },
-  {
-    id: '4',
-    name: 'Jennifer Thompson, RN',
-    role: 'Director of Patient Care',
-    qualifications: [
-    'BSN, Nursing',
-    'Certified Aesthetic Nurse',
-    'Advanced Injector',
-    '8+ years experience'],
-
-    image: "https://img.rocket.new/generatedImages/rocket_gen_img_140e98ca6-1763294093740.png",
-    alt: 'Jennifer Thompson, Director of Patient Care, professional photo in nursing uniform',
-    bio: 'Jennifer oversees all patient care operations, ensuring every patient receives personalized attention and support throughout their transformation journey.',
-    specializations: [
-    'Patient Coordination',
-    'Pre/Post-Op Care',
-    'Injectable Treatments',
-    'Patient Education']
-
-  },
-  {
-    id: '5',
-    name: 'Dr. James Anderson',
-    role: 'Anesthesiologist',
-    qualifications: [
-    'MD, Yale School of Medicine',
-    'Board Certified Anesthesiologist',
-    'Pain Management Specialist',
-    '14+ years experience'],
-
-    image: "https://img.rocket.new/generatedImages/rocket_gen_img_1b36cae89-1763294738662.png",
-    alt: 'Dr. James Anderson, Anesthesiologist, professional portrait in surgical attire',
-    bio: 'Dr. Anderson ensures patient safety and comfort during all surgical procedures. His expertise in pain management contributes to optimal recovery experiences.',
-    specializations: [
-    'Surgical Anesthesia',
-    'Pain Management',
-    'Patient Monitoring',
-    'Emergency Response']
-
-  },
-  {
-    id: '6',
-    name: 'Maria Santos',
-    role: 'Patient Coordinator',
-    qualifications: [
-    'BA, Healthcare Administration',
-    'Certified Patient Advocate',
-    'Bilingual (English/Spanish)',
-    '6+ years experience'],
-
-    image: "https://img.rocket.new/generatedImages/rocket_gen_img_12672b149-1763294392419.png",
-    alt: 'Maria Santos, Patient Coordinator, professional headshot in business attire',
-    bio: 'Maria is your first point of contact, guiding you through consultations, scheduling, and ensuring a seamless experience from initial inquiry to post-operative care.',
-    specializations: [
-    'Consultation Scheduling',
-    'Insurance Coordination',
-    'Patient Support',
-    'Multilingual Services']
+    alt: 'Dr. Evans Spanton Masitara, board-certified plastic surgeon.',
+    bio: 'Dr. Evans Spanton Masitara brings over 10 years of expertise in aesthetic and reconstructive surgery. His patient-centered approach combines technical precision with artistic vision, ensuring natural-looking results that enhance confidence.',
+    specializations: []
 
   }];
 
